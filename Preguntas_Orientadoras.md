@@ -31,8 +31,9 @@ La familia Córtex M tiene un espacio para direcciones de memoria de 4Gb, partic
   Región de periféricos.</br>
   Control interno - Bus privado.</br>
 <b>5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?<b></br>
-  Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS y PSP para aplicaciones.
-<b>6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.<b></br>
+  Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS y PSP para aplicaciones.</br>
+<b>6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no privilegiado y nuevamente a privilegiado.<b></br>
+  Los microprocesadores Córtex M3 y M4 cuentan con dos modos de privilegio o niveles de acceso: privilegiado y no privilegiado. En el primero, es posible interactuar con todos los recursos del microprocesador, a diferencia del no privilegiado donde se restringen accesos.
 <b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo<b></br>
 <b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo<b></br>
 <b>9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).<b></br>
