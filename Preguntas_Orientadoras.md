@@ -30,29 +30,39 @@ La familia Córtex M tiene un espacio para direcciones de memoria de 4Gb, partic
   Región de datos - Memoria SRAM.</br>
   Región de periféricos.</br>
   Control interno - Bus privado.</br>
-<b>5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?</b></br>
+<h3><b>5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?</b></br></h3>
   Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS y PSP para aplicaciones.</br>
-<b>6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no privilegiado y nuevamente a privilegiado.</b></br>
-  Los microprocesadores Córtex M3 y M4 cuentan con dos modos de privilegio o niveles de acceso: privilegiado y no privilegiado. En el primero, es posible interactuar con todos los recursos del microprocesador, a diferencia del no privilegiado donde se restringen accesos.
-<b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo</b></br>
-<b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo</b></br>
-<b>9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).<b></br>
-<b>10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?<b></br>
-<b>11. Describa la secuencia de reset del microprocesador.<b></br>
-<b>12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?<b></br>
-<b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo<b></br>
-<b>14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?<b></br>
-<b>15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo<b></br>
-<b>16. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?<b></br>
-<b>17. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.<b></br>
-<b>18. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?<b></br>
-<b>19. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?<b></br>
-<b>20. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?<b></br>
-<b>21. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.<b></br>
-<b>22. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.<b></br>
+<h3><b>6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no privilegiado y nuevamente a privilegiado.</b></br></h3>
+  <h4>Modos de privilegio</h4>
+  Los microprocesadores Córtex M3 y M4 cuentan con dos modos de privilegio o niveles de acceso: privilegiado y no privilegiado. En el primero, es posible interactuar con todas las areas de memoria, a diferencia del no privilegiado donde se restringen accesos mediante la activación del MPU.</br>
+  <h4>Modos de operación</h4>
+  Los microprocesadores Córtex M3 y M4 tienen dos modos de operación: Handler, en donde se ejecutan las excepciones y Thread, que constituye al modo por defecto en donde corre código común, este a su vez puede ser privilegiado o no privilegiado.</br>
+  <h4>Ejemplo de cambio de modo de privilegio</h4>
+  
+<h3><b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo.</b></br></h3>
+Registro que puede hacer uso de diferentes modos de direccionamiento mismo que es independiente de la instrucción.
+<h3><b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo</b></br></h3>
+
+<h3><b>9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).</b></br></h3>
+
+<h3><b>10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?</b></br></h3>
+<h3><b>11. Describa la secuencia de reset del microprocesador.</b></br></h3>
+<h3><b>12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?</b></br></h3>
+<h3><b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo</b></br></h3>
+<h3><b>14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?</b></br></h3>
+<h3><b>15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo</b></br></h3>
+<h3><b>16. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?</b></br></h3>
+<h3><b>17. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.</b></br></h3>
+<h3><b>18. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?</b></br></h3>
+<h3><b>19. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?</b></br></h3>
+<h3><b>20. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?</b></br></h3>
+<h3><b>21. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.</b></br></h3>
+<h3><b>22. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.</b></br></h3>
 <h1>ISA</h1>
-<b>1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.<b></br>
-<b>2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.<b></br>
-<b>3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.<b></br>
-<b>4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?<b></br>
-<b>5. ¿Qué es una instrucción SIMD? ¿En qué se aplicany que ventajas reporta su uso? Dé un ejemplo.<b></br>
+<h3><b>1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.</b></br></h3>
+<h3><b>2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.</b></br></h3>
+El sufijo s se utiliza para actualiza la bandera del registro de estado.
+Ejemplo: MOVS R0, R1.
+<h3><b>3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.</b></br></h3>
+<h3><b>4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?</b></br></h3>
+<h3><b>5. ¿Qué es una instrucción SIMD? ¿En qué se aplicany que ventajas reporta su uso? Dé un ejemplo.</b></br></h3>
