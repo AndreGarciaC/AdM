@@ -149,8 +149,10 @@ void productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 	uint32_t temp;
 	for(uint32_t i=0;i<longitud;i++)
 	{
-		temp = vectorIn[i]*escalar;
-        vectorOut[i]=temp >= 0xFFFF ? 0xFFFF : temp;
+		temp = (uint32_t)*vectorIn*(uint32_t)escalar;
+		*vectorOut=(uint16_t)temp >= 0xFFFF ? 0xFFFF : temp;
+		vectorIn++;
+		vectorOut++;
 	}
 }
 
@@ -159,8 +161,10 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 	uint32_t temp;
     for(uint32_t i=0;i<longitud;i++)
 	{
-		temp = vectorIn[i]*escalar;
-        vectorOut[i]=temp >= 0xFFF ? 0xFFF : temp;
+    	temp = (uint32_t)*vectorIn*(uint32_t)escalar;
+    	*vectorOut=(uint16_t)temp >= 0xFFF ? 0xFFF : temp;
+    	vectorIn++;
+    	vectorOut++;
 	}
 }
 /* USER CODE END 0 */
@@ -207,7 +211,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  uint16_t v1[10];
+	  uint16_t v2[10];
+	  productoEscalar12(v1,v2,sizeof(v1),5);
+	  printf("");
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
