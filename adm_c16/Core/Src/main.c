@@ -126,50 +126,42 @@ static void PrivilegiosSVC (void)
     // Fin del ejemplo de SVC
 }
 
-void zeros (uint32_t * vector, uint32_t longitud)
+void zeros (uint32_t * vector, uint32_t longitud) //vector=&vector{0}= direccion    *vector = valor
 {
-	uint32_t _vector[longitud];
-
 	for(uint32_t i=0;i<longitud;i++)
 	{
-		_vector[i]= 0;
+        * vector = 0;
+        vector++;
 	}
-	vector = _vector;
 }
 
 void productoEscalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar)
 {
-	uint32_t _vectorIn[longitud];
-
-	*_vectorIn = &vectorIn;
 
 	for(uint32_t i=0;i<longitud;i++)
 	{
-		_vectorIn[i]= _vectorIn[i]*escalar;
+		vectorOut[i]= vectorIn[i]*escalar;
 	}
-	vectorOut = _vectorIn;
 }
 
 void productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar)
 {
-	uint32_t _vectorIn[longitud]= *vectorIn;
-
+	uint32_t temp;
 	for(uint32_t i=0;i<longitud;i++)
 	{
-		_vectorIn[i]= _vectorIn[i]*escalar;
+		temp = vectorIn[i]*escalar;
+        vectorOut[i]=temp >= 0xFFFF ? 0xFFFF : temp;
 	}
-	*vectorOut = _vectorIn;
 }
 
 void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar)
 {
-	uint32_t _vectorIn[longitud]= *vectorIn;
-
-	for(uint32_t i=0;i<longitud;i++)
+	uint32_t temp;
+    for(uint32_t i=0;i<longitud;i++)
 	{
-		_vectorIn[i]= _vectorIn[i]*escalar;
+		temp = vectorIn[i]*escalar;
+        vectorOut[i]=temp >= 0xFFF ? 0xFFF : temp;
 	}
-	*vectorOut = _vectorIn;
 }
 /* USER CODE END 0 */
 
