@@ -81,6 +81,7 @@
 @
 .thumb_func
     asm_productoEscalar32:
+    push {r4-r5}
     ldr r4, [r0]			@ Carga en r4 el primer componente de r0
     .asm_pE32_for:			@ Inicio el loop for
         mul r5, r4, r3		@ Multiplica r4*r3 y lo carga en r5.
@@ -88,6 +89,7 @@
         ldr r4,[r0, 4]!     @ Carga en r4 el componente de r0+=4
         subs r2, 1 			@ resto para saber que me da cero y finalizo el loop.
         bne .asm_pE32_for   @si el resultado de la resta no es cero Z=0
+        pop {r4-r5}
         bx lr
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -105,6 +107,7 @@
 @
 .thumb_func
     asm_productoEscalar16:
+    push {r4-r5}
     ldrsh r4, [r0]			@ Carga en r4 el primer componente de r0
     .asm_pE16_for:			@ Inicio el loop for
         mul r5, r4, r3		@ Multiplica r4*r3 y lo carga en r5.
@@ -112,6 +115,7 @@
         ldrsh r4,[r0, 2]!     @ Carga en r4 el componente de r0+=4
         subs r2, 1 			@ resto para saber que me da cero y finalizo el loop.
         bne .asm_pE16_for   @si el resultado de la resta no es cero Z=0
+        pop {r4-r5}
         bx lr
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -129,6 +133,7 @@
 @
 .thumb_func
     asm_productoEscalar12:
+    push {r4-r6}
     ldrsh r4, [r0,#0]			@ Carga en r4 el primer componente de r0
     ldr r6, =4095
     .asm_pE12_for:			@ Inicio el loop for
@@ -141,6 +146,7 @@
    		ldrsh r4,[r0, 2]!     @ Carga en r4 el componente de r0+=4
         subs r2, 1 			@ resto para saber que me da cero y finalizo el loop.
         bne .asm_pE12_for   @si el resultado de la resta no es cero Z=0
+        pop {r4-r6}
         bx lr
    	case_saturate:
     	ldrsh r5, =4095
