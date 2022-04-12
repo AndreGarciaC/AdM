@@ -105,11 +105,11 @@
 @
 .thumb_func
     asm_productoEscalar16:
-    ldr r4, [r0]			@ Carga en r4 el primer componente de r0
+    ldrsh r4, [r0]			@ Carga en r4 el primer componente de r0
     .asm_pE16_for:			@ Inicio el loop for
         mul r5, r4, r3		@ Multiplica r4*r3 y lo carga en r5.
         str r5, [r1], 2		@ Guarda en r1+=4 el valor de r5.
-        ldr r4,[r0, 2]!     @ Carga en r4 el componente de r0+=4
+        ldrsh r4,[r0, 2]!     @ Carga en r4 el componente de r0+=4
         subs r2, 1 			@ resto para saber que me da cero y finalizo el loop.
         bne .asm_pE16_for   @si el resultado de la resta no es cero Z=0
         bx lr
@@ -129,11 +129,20 @@
 @
 .thumb_func
     asm_productoEscalar12:
-    ldr r4, [r0]			@ Carga en r4 el primer componente de r0
+    ldrsh r4, [r0,#0]			@ Carga en r4 el primer componente de r0
+    ldr r6, =4095
     .asm_pE12_for:			@ Inicio el loop for
         mul r5, r4, r3		@ Multiplica r4*r3 y lo carga en r5.
+        cmp r5, r6    @Error: invalid constant (fff) after fixup
+        bgt case_saturate
         str r5, [r1], 2		@ Guarda en r1+=4 el valor de r5.
-        ldr r4,[r0, 2]!     @ Carga en r4 el componente de r0+=4
+    	b end
+   	end:
+   		ldrsh r4,[r0, 2]!     @ Carga en r4 el componente de r0+=4
         subs r2, 1 			@ resto para saber que me da cero y finalizo el loop.
         bne .asm_pE12_for   @si el resultado de la resta no es cero Z=0
         bx lr
+   	case_saturate:
+    	ldrsh r5, =4095
+    	str r5, [r1], 2
+    	b end
