@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "asm_func.h"
+#define N_FLTR 3
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,6 +66,11 @@ void zeros (uint32_t * vector, uint32_t longitud);
 void productoEscalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar);
 void productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
 void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
+void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn);
+void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
+int32_t max (int32_t * vectorIn, uint32_t longitud);
+void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
+void invertir (uint16_t * vector, uint32_t longitud);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -167,6 +173,25 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
     	vectorOut++;
 	}
 }
+
+void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn)
+{
+	uint32_t sum;
+
+	for (uint32_t i=0; i<longitudVectorIn; i++)
+	{
+		sum = 0;
+		for (uint32_t j=i; j<(N_FLTR+i); j++)
+		{
+			if (j>longitudVectorIn-1)
+				j=j%longitudVectorIn;
+			sum += vectorIn[j];
+		}
+		*vectorOut=(sum/N_FLTR);
+		vectorOut++;
+
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -204,16 +229,19 @@ int main(void)
   PrivilegiosSVC ();
 
   const uint32_t Resultado = asm_sum (5, 3);
-  uint32_t vector[3];
-  asm_zeros(vector, 3);
-  uint32_t vector1[3] = {1,2,3};
-  uint32_t vector2[3];
-  asm_productoEscalar32(vector1, vector2, 3, 5);
-  /*uint16_t vector1[3] = {1,2,60000};
-  uint16_t vector2[3];
-  asm_productoEscalar16(vector1, vector2, 3, 5);
-  uint16_t vector1[3] = {1,2,820};
-  asm_productoEscalar12(vector1, vector2, 3, 5);*/
+//  uint32_t vector[3];
+//  asm_zeros(vector, 3);
+//  uint32_t vector1[3] = {1,2,3};
+//  uint32_t vector2[3];
+//  asm_productoEscalar32(vector1, vector2, 3, 5);
+//  /*uint16_t vector1[3] = {1,2,60000};
+//  uint16_t vector2[3];
+//  asm_productoEscalar16(vector1, vector2, 3, 5);
+//  uint16_t vector1[3] = {1,2,820};
+//  asm_productoEscalar12(vector1, vector2, 3, 5);*/
+  uint32_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
+  uint32_t vectorOut[10];
+  filtroVentana10(vectorIn, vectorOut, 10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
