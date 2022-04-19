@@ -58,6 +58,8 @@ En los procesadores ARM, la pila funciona como un mecanismo de uso de memoria qu
 En el caso específico de funciones, se hace uso de las instrucciones PUSH y POP. Cuando se llama una función los valores de los registros son guardados en el stack mediante la instrucción PUSH y luego son retornados a sus valores originales utilizando POP.
 <h3><b>11. Describa la secuencia de reset del microprocesador.</b></br></h3>
 <h3><b>12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?</b></br></h3>
+Los core peripherals son componentes periféricos con un funcionamiento definido dependientes del procesador y cuyo comportamiento es estándar y reusable en toda la gama de procesadores Córtex M. </br>
+Los periféricos que no entran en esta clasificación no requieren una interacción del procesador y pueden presentar características adicionales para implementar diversas funciones.
 <h3><b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo</b></br></h3>
 <h3><b>14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?</b></br></h3>
 <h3><b>15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo</b></br></h3>
