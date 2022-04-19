@@ -9,6 +9,11 @@
 .global asm_productoEscalar32
 .global asm_productoEscalar16
 .global asm_productoEscalar12
+.global asm_filtroVentana10
+.global asm_pack32to16
+.global asm_max
+.global asm_downsampleM
+.global asm_invertir
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -94,7 +99,7 @@
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
-@   void asm_productoEscalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar);
+@   productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
 @
 @ Parametros recibidos:
 @   r0: vectorIn, puntero al vector que será multiplicado.
@@ -120,7 +125,7 @@
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
-@   void asm_productoEscalar32 (uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar);
+@   void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar)
 @
 @ Parametros recibidos:
 @   r0: vectorIn, puntero al vector que será multiplicado.
@@ -152,3 +157,45 @@
     	ldrsh r5, =4095
     	str r5, [r1], 2
     	b end
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn);
+@
+@ Parametros recibidos:
+@   r0: vectorIn, puntero al vector de muestras donde se aplicará el filtro.
+@   r1: vectorOut, puntero al vector de salida que contiene los promedios. Se han considerado 3 elementos por ventana.
+@   r2: longitud del vector.
+@
+@	r3 N, r4 sum, r5 temp, r6 aux idx, r7 i, r8 j ,r9 cond j
+@ Valor de retorno:
+@   void
+@
+.thumb_func
+    asm_filtroVentana10:
+    push {r4-r10}
+    ldr r3,=3				@ Cargo el número de elementos a promediar en r3.
+
+    .asm_v10i_for:			@ Inicio el loop for para recorrer el vector de muestras.
+    	ldr r4, =0			@ Cargo 0 en r4 quien será el registro que almacenará la suma parcial.
+    	mov r8, r7			@ Inicio j con el valor de i
+    	.asm_v10j_for:		@ Inicio el loop for para recorrer elementos que serán promediados.
+    		adds r9, r3, r7	@ N_FLTR+i
+    		cmp r8, r9
+    		blt end_for_j	@ j<(N_FLTR+i)
+    		udiv r6, r8, r2		@ Divide j para longitud.
+    		mul r10, r2, r8		@ Reconstruyendo msub r6, r6, r2, r8.
+    		subs r6, r10, r6
+        	ldrsh r6, [r0,r6]	 @ Carga en r6 el componente idx = módulo de r0.
+        	add r4, r4, r6		@ sum+=aux
+    		add r8, r8, #1	@ j++
+    		b .asm_v10j_for
+        end_for_j:
+        udiv r5, r4, r3    	@ promedio
+        str r5, [r1], 2		@ Guarda en r1+=2 el valor de r5.
+        adds r7, r7, #1	    @ i++
+    	cmp r7, r2
+        blt end_for_i		@ i<longitud
+        b .asm_v10i_for
+    end_for_i:
+        pop {r4-r10}
+        bx lr

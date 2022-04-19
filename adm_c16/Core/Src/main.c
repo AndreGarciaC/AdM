@@ -23,6 +23,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "asm_func.h"
+#include <stdio.h>
+#include <stdint.h>
 #define N_FLTR 3
 /* USER CODE END Includes */
 
@@ -176,20 +178,20 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 
 void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn)
 {
-	uint32_t sum;
+	uint32_t sum, temp;
+	uint16_t aux;
 
 	for (uint32_t i=0; i<longitudVectorIn; i++)
 	{
 		sum = 0;
 		for (uint32_t j=i; j<(N_FLTR+i); j++)
 		{
-			if (j>longitudVectorIn-1)
-				j=j%longitudVectorIn;
-			sum += vectorIn[j];
+			aux = vectorIn[j%(longitudVectorIn)];
+			sum += (uint32_t)aux;
 		}
-		*vectorOut=(sum/N_FLTR);
-		vectorOut++;
-
+		temp = sum/N_FLTR;
+		*vectorOut=(uint16_t)temp;
+		*vectorOut++;
 	}
 }
 /* USER CODE END 0 */
@@ -238,10 +240,9 @@ int main(void)
 //  uint16_t vector2[3];
 //  asm_productoEscalar16(vector1, vector2, 3, 5);
 //  uint16_t vector1[3] = {1,2,820};
-//  asm_productoEscalar12(vector1, vector2, 3, 5);*/
-  uint32_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
-  uint32_t vectorOut[10];
-  filtroVentana10(vectorIn, vectorOut, 10);
+  //  asm_productoEscalar12(vector1, vector2, 3, 5);*/
+  uint16_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
+  uint16_t vectorOut[10];
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -249,10 +250,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  uint16_t v1[4]={1,2,3,4};
-	  uint16_t v2[4];
-	  productoEscalar12(v1,v2,sizeof(v1),2);
-	  printf("");
+	  filtroVentana10(vectorIn, vectorOut, 10);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
