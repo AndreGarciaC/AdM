@@ -54,6 +54,8 @@ MOVGT R1, R0		<em>Si es GREATER THAN Mueve los datos de R0 al registro destino R
 <h4>Non-Maskable Interrupt (NMI)</h4> Está siempre habilitada debido a que, en el escenario de que fallen otros handlers de excepciones, se genere una interrupción.</br>
 <h4>Hardfault</h4> Un HardFault es una excepción que se produce debido a un fallo de sistema. Gestiona diferentes errores como accesos no pemitidos o a mala memoria, entre otros.
 <h3><b>10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?</b></br></h3>
+En los procesadores ARM, la pila funciona como un mecanismo de uso de memoria que da lugar a que una porción de la misma sea utilizada como un buffer para almacenamiento de datos. La pila o stack es usada para transferir informacion a diferentes rutinas, almacenar variables locales, así como para el almacenamiento temporal durante operaciones con registros y también guarda el estado del procesador y los registros al momento de una excepción.</br>
+En el caso específico de funciones, se hace uso de las instrucciones PUSH y POP. Cuando se llama una función los valores de los registros son guardados en el stack mediante la instrucción PUSH y luego son retornados a sus valores originales utilizando POP.
 <h3><b>11. Describa la secuencia de reset del microprocesador.</b></br></h3>
 <h3><b>12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?</b></br></h3>
 <h3><b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo</b></br></h3>
