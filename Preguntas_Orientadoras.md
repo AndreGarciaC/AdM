@@ -76,6 +76,8 @@ En Córtex M, la MPU soporta 8 regiones, en el caso de haber solapamientos los p
 El mecanismo de excepción SVC (Supervisor Call) proporciona la transición de no privilegiado a privilegiado. En el marco de un sistema operativo embebido, el SVC se utiliza por una tarea de aplicación que se ejecuta sin privilegios para solicitar servicios al sistema operativo, mismo que corre en un estado de ejecución con privilegios. 
 <h1>ISA</h1>
 <h3><b>1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.</b></br></h3>
+En los procesadores ARM los sufijos son un conjunto de letras -afijo- que preceden una instrucción. Estos son utilizados para actualizar las banderas del registro de estado APSR como el caso del sufijo "S"; para la ejecución condicional de instrucciones, ejemplo la condición mayor que "GT"; así como para especificar los bits de uso, ".N" de narrow o 16-bit, y la precisión de los datos, ".32".
+Ejemplo: BGT case_saturate Branch a case_saturate si la instrucción anterior da true a la condición mayor que.
 <h3><b>2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.</b></br></h3>
 El sufijo s se utiliza para actualiza la bandera del registro de estado.
 Ejemplo: MOVS R0, R1.
