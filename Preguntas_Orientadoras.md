@@ -49,7 +49,10 @@ ITT GT				<em>Las siguientes instrucciones se ejecutan si R0 es GREATER THAN 0. 
 MULGT R0, R0, R1		<em>Si es GREATER THAN Multiplica R0 x R1 y guarda el resultado en R0.</em></br>
 MOVGT R1, R0		<em>Si es GREATER THAN Mueve los datos de R0 al registro destino R1.</em></br>
 <h3><b>9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).</b></br></h3>
-
+ Los microprocesadores Córtex M cuentan con un mecanismo de excepciones incluido para que, en el caso de que ocurra un error, se activen diferentes tipos de handlers. Entre las principales excepciones podemos encontrar:</br>
+<h4>Reset</h4> Ocurre con el reinicio del microprocesador, deteniendo su operación en cualquier instrucción.</br>
+<h4>Non-Maskable Interrupt (NMI)</h4> Está siempre habilitada debido a que, en el escenario de que fallen otros handlers de excepciones, se genere una interrupción.</br>
+<h4>Hardfault</h4> Un HardFault es una excepción que se produce debido a un fallo de sistema. Gestiona diferentes errores como accesos no pemitidos o a mala memoria, entre otros.
 <h3><b>10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?</b></br></h3>
 <h3><b>11. Describa la secuencia de reset del microprocesador.</b></br></h3>
 <h3><b>12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?</b></br></h3>
