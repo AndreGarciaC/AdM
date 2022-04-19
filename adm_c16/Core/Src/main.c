@@ -206,6 +206,20 @@ int32_t max (int32_t * vectorIn, uint32_t longitud)
 	return val;
 }
 
+void invertir (uint16_t * vector, uint32_t longitud)
+{
+	uint16_t vectorAux[longitud];
+	uint32_t aux = longitud-1;
+	for(uint32_t i=0;i<longitud;i++)
+	{
+	    vectorAux[aux-i] = vector[i];
+	}
+	for(uint32_t i=0;i<longitud;i++)
+	{
+        vector[i] = vectorAux[i];
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -255,8 +269,10 @@ int main(void)
 //  asm_productoEscalar12(vector1, vector2, 3, 5);*/
 //  uint16_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
 //  uint16_t vectorOut[10];
-  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
-  int32_t vectorOut = max(vectorIn,10);
+//  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
+//  int32_t vectorOut = max(vectorIn,10);
+  uint16_t vectorIn[10] = {1,2,3,0,5,6,0,8,9,0};
+  invertir(vectorIn,10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
