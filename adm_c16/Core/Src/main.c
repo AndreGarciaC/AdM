@@ -274,10 +274,10 @@ int main(void)
 //  asm_productoEscalar12(vector1, vector2, 3, 5);*/
 //  uint16_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
 //  uint16_t vectorOut[10];
-  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
-  int32_t vectorOut = asm_max(vectorIn,10);
-//  uint16_t vectorIn[10] = {1,2,3,0,5,6,0,8,9,0};
-//  invertir(vectorIn,10);
+//  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
+//  int32_t vectorOut = asm_max(vectorIn,10);
+  uint16_t vectorIn[10] = {1,2,3,0,5,6,0,8,9,0};
+  asm_invertir(vectorIn,10);
   /* USER CODE END 2 */
 
   /* Infinite loop */

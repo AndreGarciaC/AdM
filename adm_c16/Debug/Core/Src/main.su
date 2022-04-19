@@ -6,7 +6,7 @@
 ../Core/Src/main.c:179:6:filtroVentana10	48	static
 ../Core/Src/main.c:198:9:max	32	static
 ../Core/Src/main.c:214:6:invertir	56	dynamic
-../Core/Src/main.c:234:5:main	64	static
+../Core/Src/main.c:234:5:main	40	static
 ../Core/Src/main.c:297:6:SystemClock_Config	88	static
 ../Core/Src/main.c:343:13:MX_ETH_Init	8	static
 ../Core/Src/main.c:392:13:MX_USART3_UART_Init	8	static

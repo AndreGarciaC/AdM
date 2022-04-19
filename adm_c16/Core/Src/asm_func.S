@@ -217,7 +217,7 @@
     push {r4-r8}
     ldr r3,[r0,#0]			@ Cargo el primer elemento en r3. r3 = val
 	ldr r4, =0				@ Cargo posicion = 0. r4 = pos
-	ldr r5, =1 @i = 1		@ Cargo r5 = 0, registro para iterar
+	ldr r5, =1 @i = 1		@ Cargo r5 = 1, registro para iterar
 	ldr r8, =4				@ Cargo 4 en un registro para poder usarlo al multiplicar.
     .asm_max_for:			@ Inicio el loop for para recorrer el vector de muestras.
     	cmp r5, r1
@@ -235,3 +235,43 @@
 	pop {r4-r8}
     bx lr
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void invertir (uint16_t * vector, uint32_t longitud)
+@
+@ Parametros recibidos:
+@   r0: vector.
+@   r1: longitud del vector.
+@	r2 vector aux, r3 aux, r4 i, r5 aux-i, r6 long -1, r7 16bits
+@ Valor de retorno:
+@   void
+@
+.thumb_func
+    asm_invertir:
+    push {r4-r9}
+    subs r3, r1,#1			@
+	ldr r4, =0 @i = 0		@ Cargo r4 = 0, registro para iterar
+	ldr r7, =2				@ Cargo 2 en un registro para poder usarlo al multiplicar.
+    .asm_invertir_for1:		@ Inicio el loop for para recorrer el vector.
+    	cmp r4, r1
+    	bgt end_for1			@ Si r4 > longitud sale del for
+    	subs r5, r3,r4		@ Cargo r3-i en r5 para empezar a iterar desde el último elemento
+    	mul r6, r4,r7		@ Cargo i en r6. Multiplico para iterar cada +16bits.
+    	ldr r9, [r0,r6]		@ Cargo elemento de vector en r9.
+    	mul r8, r5,r7		@ Cargo long - i en r8. Multiplico para iterar cada -16bits.
+    	str r9, [r2,r8]	@ Guardo r9 en vector r2.
+    	adds r4, r4,#1		@Incremento mi iteración
+		b .asm_invertir_for1
+	end_for1:
+	ldr r4, =0 @i = 0		@ Cargo r4 = 0, registro para iterar
+	.asm_invertir_for2:
+		cmp r4, r1
+    	bgt end_for2		@ Si r4 > longitud sale del for
+    	mul r6, r4,r7		@ Cargo i en r6. Multiplico para iterar cada +16bits.
+    	ldr r9, [r2,r6]		@ Cargo elemento de vector en r9.
+    	str r9, [r0,r6]	@ Guardo r9 en vector r2.
+		adds r4, r4,#1		@Incremento mi iteración
+		b .asm_invertir_for2
+	end_for2:
+	pop {r4-r9}
+    bx lr
