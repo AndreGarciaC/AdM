@@ -194,6 +194,18 @@ void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitu
 		*vectorOut++;
 	}
 }
+
+int32_t max (int32_t * vectorIn, uint32_t longitud)
+{
+	int32_t val = vectorIn[0];
+
+	for(uint32_t i=1;i<longitud;i++)
+	{
+		val = val<=vectorIn[i] ? vectorIn[i] : val;
+	}
+	return val;
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -240,9 +252,11 @@ int main(void)
 //  uint16_t vector2[3];
 //  asm_productoEscalar16(vector1, vector2, 3, 5);
 //  uint16_t vector1[3] = {1,2,820};
-  //  asm_productoEscalar12(vector1, vector2, 3, 5);*/
-  uint16_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
-  uint16_t vectorOut[10];
+//  asm_productoEscalar12(vector1, vector2, 3, 5);*/
+//  uint16_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
+//  uint16_t vectorOut[10];
+  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
+  int32_t vectorOut = max(vectorIn,10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -250,8 +264,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  filtroVentana10(vectorIn, vectorOut, 10);
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
