@@ -198,12 +198,17 @@ void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitu
 int32_t max (int32_t * vectorIn, uint32_t longitud)
 {
 	int32_t val = vectorIn[0];
+	uint32_t pos = 0;
 
 	for(uint32_t i=1;i<longitud;i++)
 	{
-		val = val<=vectorIn[i] ? vectorIn[i] : val;
+		if(val<=vectorIn[i])
+		{
+			val = vectorIn[i];
+			pos = i;
+		}
 	}
-	return val;
+	return pos;
 }
 
 void invertir (uint16_t * vector, uint32_t longitud)
@@ -269,10 +274,10 @@ int main(void)
 //  asm_productoEscalar12(vector1, vector2, 3, 5);*/
 //  uint16_t vectorIn[10] = {1,2,3,4,5,6,7,8,9,0};
 //  uint16_t vectorOut[10];
-//  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
-//  int32_t vectorOut = max(vectorIn,10);
-  uint16_t vectorIn[10] = {1,2,3,0,5,6,0,8,9,0};
-  invertir(vectorIn,10);
+  int32_t vectorIn[10] = {1,2,-3,4,5,-6,7,8,-9,0};
+  int32_t vectorOut = asm_max(vectorIn,10);
+//  uint16_t vectorIn[10] = {1,2,3,0,5,6,0,8,9,0};
+//  invertir(vectorIn,10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
