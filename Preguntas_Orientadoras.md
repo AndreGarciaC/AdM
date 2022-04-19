@@ -73,6 +73,7 @@ La unidad de protección de memoria es un componente presente de manera opcional
 En Córtex M, la MPU soporta 8 regiones, en el caso de haber solapamientos los permisos de acceso y los atributos serán asignados a la dirección de memoria ubicada en la región de mayor número. En el caso que una ubicación de memoria no esté definida en una región del MPU, se genera una excepción de error y la transferencia de datos es bloqueada.
 <h3><b>21. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.</b></br></h3>
 <h3><b>22. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.</b></br></h3>
+El mecanismo de excepción SVC (Supervisor Call) proporciona la transición de no privilegiado a privilegiado. En el marco de un sistema operativo embebido, el SVC se utiliza por una tarea de aplicación que se ejecuta sin privilegios para solicitar servicios al sistema operativo, mismo que corre en un estado de ejecución con privilegios. 
 <h1>ISA</h1>
 <h3><b>1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.</b></br></h3>
 <h3><b>2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.</b></br></h3>
