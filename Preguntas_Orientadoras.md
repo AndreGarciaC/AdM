@@ -42,7 +42,12 @@ La familia Córtex M tiene un espacio para direcciones de memoria de 4Gb, partic
 <h3><b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo.</b></br></h3>
 Registro que puede hacer uso de diferentes modos de direccionamiento mismo que es independiente de la instrucción.
 <h3><b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo</b></br></h3>
-
+Las instrucciones IT (IF-THEN) permiten que hasta 4 instrucciones precedentes, ya sean de procesamiento de datos o acceso de memoria, puedan ser ejecutadas condicionalmente. Esto da lugar a la optimización del largo de código evitando el costo que representa la implementación de branches, sobretodo en casos cuando se requieren branches condicionales y no condicionales.</br>
+Ejemplo: <br>
+CMP R0, #0			<em>Compara el dato del registro R0 y el valor 0.</em></br>
+ITT GT				<em>Las siguientes instrucciones se ejecutan si R0 es GREATER THAN 0. Actualiza las banderas APSR.</em></br>
+MULGT R0, R0, R1		<em>Si es GREATER THAN Multiplica R0 x R1 y guarda el resultado en R0.</em></br>
+MOVGT R1, R0		<em>Si es GREATER THAN Mueve los datos de R0 al registro destino R1.</em></br>
 <h3><b>9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).</b></br></h3>
 
 <h3><b>10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?</b></br></h3>
