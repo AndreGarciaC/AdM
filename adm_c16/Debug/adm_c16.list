@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 13 .debug_line   0000c4da  00000000  00000000  0002003c  2**0
+ 13 .debug_line   0000c537  00000000  00000000  0002003c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_info   0000eda2  00000000  00000000  0002c516  2**0
+ 14 .debug_info   0000ee1b  00000000  00000000  0002c573  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00001c6f  00000000  00000000  0003b2b8  2**0
+ 15 .debug_abbrev 00001c6f  00000000  00000000  0003b38e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00000b70  00000000  00000000  0003cf28  2**3
+ 16 .debug_aranges 00000b78  00000000  00000000  0003d000  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    000daade  00000000  00000000  0003da98  2**0
+ 17 .debug_str    000daaf3  00000000  00000000  0003db78  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_ranges 00000ab8  00000000  00000000  00118578  2**3
+ 18 .debug_ranges 00000ac0  00000000  00000000  00118670  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_macro  00023fbb  00000000  00000000  00119030  2**0
+ 19 .debug_macro  00023fbb  00000000  00000000  00119130  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000050  00000000  00000000  0013cfeb  2**0
+ 20 .comment      00000050  00000000  00000000  0013d0eb  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003024  00000000  00000000  0013d03c  2**2
+ 21 .debug_frame  0000304c  00000000  00000000  0013d13c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -340,7 +340,7 @@ Disassembly of section .text:
     bx lr
  80002da:	4770      	bx	lr
 
-080002dc <asm_invertir>:
+080002dc <asm_downsampleM>:
 @ Valor de retorno:
 @   void
 @
@@ -855,7 +855,7 @@ int main(void)
  80006c6:	463b      	mov	r3, r7
  80006c8:	210a      	movs	r1, #10
  80006ca:	4618      	mov	r0, r3
- 80006cc:	f7ff fe06 	bl	80002dc <asm_invertir>
+ 80006cc:	f7ff fe06 	bl	80002dc <asm_downsampleM>
   /* USER CODE END 2 */
 
   /* Infinite loop */
