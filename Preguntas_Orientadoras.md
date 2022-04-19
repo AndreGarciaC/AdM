@@ -79,8 +79,8 @@ El mecanismo de excepción SVC (Supervisor Call) proporciona la transición de n
 En los procesadores ARM los sufijos son un conjunto de letras -afijo- que preceden una instrucción. Estos son utilizados para actualizar las banderas del registro de estado APSR como el caso del sufijo "S"; para la ejecución condicional de instrucciones, ejemplo la condición mayor que "GT"; así como para especificar los bits de uso, ".N" de narrow o 16-bit, y la precisión de los datos, ".32".
 Ejemplo: BGT case_saturate Branch a case_saturate si la instrucción anterior da true a la condición mayor que.
 <h3><b>2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.</b></br></h3>
-El sufijo s se utiliza para actualiza la bandera del registro de estado.
-Ejemplo: MOVS R0, R1.
+El sufijo s es opcional y se utiliza para actualizar las banderas del registro de estado APSR: N, Z, C, V, Q, GE. Estas banderas son analizadas en la ejecución condicional de instrucciones, indicar saturación, entre otros casos.
+Ejemplo: MOVS R2, R1. <em>Mueve los datos de R1 al registro destino R2 y a su vez actualiza las banderas APSR.</em></br>
 <h3><b>3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.</b></br></h3>
 <h3><b>4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?</b></br></h3>
 <h3><b>5. ¿Qué es una instrucción SIMD? ¿En qué se aplicany que ventajas reporta su uso? Dé un ejemplo.</b></br></h3>
