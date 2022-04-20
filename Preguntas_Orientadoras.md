@@ -31,16 +31,18 @@ La familia Córtex M tiene un espacio para direcciones de memoria de 4Gb, partic
   Región de periféricos.<br>
   Control interno - Bus privado.<br>
 <h3><b>5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?</b><br></h3>
-  Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS e interrupciones y PSP para tareas.<br>
+Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS e interrupciones y PSP para tareas.<br>
 
 Al manejar punteros de manera independiente entre el sistema operativo y la tareas, garantizamos que si se da un error de stack en una de estas últimas, el kernel seguirá corriendo sin corromperse, garantizando la eficiencia del sistema en esa perspectiva.<br>
 
 <h3><b>6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no privilegiado y nuevamente a privilegiado.</b><br></h3>
   <h4>Modos de privilegio</h4>
-  Los microprocesadores Córtex M3 y M4 cuentan con dos modos de privilegio o niveles de acceso: privilegiado y no privilegiado. En el primero, es posible interactuar con todas las areas de memoria, a diferencia del no privilegiado donde se restringen accesos mediante la activación del MPU.<br>
+Los microprocesadores Córtex M3 y M4 cuentan con dos modos de privilegio o niveles de acceso: privilegiado y no privilegiado. En el primero, es posible interactuar con todas las areas de memoria, a diferencia del no privilegiado donde se restringen accesos mediante la activación del MPU.<br>
   <h4>Modos de operación</h4>
-  Los microprocesadores Córtex M3 y M4 tienen dos modos de operación: Handler, en donde se ejecutan las excepciones y Thread, que constituye al modo por defecto en donde corre código común, este a su vez puede ser privilegiado o no privilegiado.<br>
+Los microprocesadores Córtex M3 y M4 tienen dos modos de operación: Handler, en donde se ejecutan las excepciones y Thread, que constituye al modo por defecto en donde corre código común, este a su vez puede ser privilegiado o no privilegiado.<br>
   <h4>Ejemplo de cambio de modo de privilegio</h4>
+
+Por defecto los procesadores inician en modo privilegiado. El software puede cambiar el procesador en modo Thread privilegiado a modo Thread no privilegiado (no puede hacerlo viceversa) escribiendo en el registro de CONTROL, que sólo puede ser modificado en el modo privilegiado. Modificando nPRIV a 1 se definiría el nivel de privilegio en el modo Thread como no privilegiado.
 
 <h3><b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo.</b><br></h3>
 Registro que puede hacer uso de diferentes modos de direccionamiento mismo que es independiente de la instrucción.
