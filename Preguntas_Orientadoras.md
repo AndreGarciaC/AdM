@@ -85,10 +85,20 @@ El mecanismo de excepción SVC (Supervisor Call) proporciona la transición de n
 <h1>ISA</h1>
 <h3><b>1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.</b><br></h3>
 En los procesadores ARM los sufijos son un conjunto de letras -afijo- que preceden una instrucción. Estos son utilizados para actualizar las banderas del registro de estado APSR como el caso del sufijo "S"; para la ejecución condicional de instrucciones, ejemplo la condición mayor que "GT"; así como para especificar los bits de uso, ".N" de narrow o 16-bit, y la precisión de los datos, ".32".<br>
-Ejemplo: BGT case_saturate <em>Branch a case_saturate si la instrucción anterior da true a la condición mayor que.</em>
+Ejemplo:<br>
+
+```assembly
+bgt case_saturate @Branch a case_saturate si la instrucción anterior da true a la condición mayor que.
+```
+
 <h3><b>2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.</b><br></h3>
 El sufijo s es opcional y se utiliza para actualizar las banderas del registro de estado APSR: N, Z, C, V, Q, GE. Estas banderas son analizadas en la ejecución condicional de instrucciones, indicar saturación, entre otros casos.
-Ejemplo: MOVS R2, R1. <em>Mueve los datos de R1 al registro destino R2 y a su vez actualiza las banderas APSR.</em><br>
+Ejemplo: <br>
+
+```assembly
+movs r2,r1 @Mueve los datos de R1 al registro destino R2 y a su vez actualiza las banderas APSR.
+```
+
 <h3><b>3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.</b><br></h3>
 Las instrucciones de aritmética saturada son aquellas que evitan problemas de desbordamiento y la consecuente distorsión de operaciones al limitar un valor máximo y mínimo del dato. En este tipo de escenarios, estas instrucciones dan lugar a la activación de la bandera Q.<br>
 Ejemplo:<br>En una operación con datos de 8 bits no signados, si el resultado es mayor a 255 pues siempre retornará 255 debido a que es el valor máximo que se puede representar con la cantidad de bits disponible. Si el resultado llegara a ser negativo, pues la operación devolverá cero.<br>
@@ -103,6 +113,7 @@ uqadd8 r0, r1,r2 @R0 tendrá un valor de 255
 Para poder implementar funciones assembler en C, es necesario definir los prototipos assembly en un fichero .h y codificarlas en el fichero .S en donde se define la variable global que será exportada a C.<br>
 Para devolver un resultado es necesario cargar el valor en R0. Sin embargo, si la función requiere de parámetros se pueden utilizar R0, R1, R2, R3.<br>
 En el caso de utilizar más registros en la función (a partir de R4) es necesario guardarlos en la pila mediante un push y liberarlos con una instrucción pop.  
+
 <h3><b>5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.</b><br></h3>
 
 Una instrucción SIMD (Single Instruction Multiple Data), tal como indica su nombre, constituye una sola instrucción que procesa de manera paralela múltiples datos en una sola operación.<br>
