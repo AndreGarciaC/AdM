@@ -62,6 +62,14 @@ Los core peripherals son componentes periféricos con un funcionamiento definido
 Los periféricos que no entran en esta clasificación no requieren una interacción del procesador y pueden presentar características adicionales para implementar diversas funciones.
 <h3><b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo</b><br></h3>
 <h3><b>14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?</b><br></h3>
+El estándar de interfaz de software para microcontroladores Cortex, CMSIS por sus siglas en inglés, es un framework de software desarrollado por ARM que abarca la mayoría de los procesadores Cortex-M y sus productos. El objetivo de su creación es estandarizar y garantizar la compatibilidad del software con varias herramientas de desarrollo y entre diferentes soluciones de software.
+
+Las ventajas de CMSIS incluyen:<br>
+Mejora de la reutilización del software.<br>
+Mayor compatibilidad del software.<br>
+Facilidad de aprendizaje.<br>
+Independencia de toolchain.<br>
+
 <h3><b>15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo</b><br></h3>
 <h3><b>16. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?</b><br></h3>
 <h3><b>17. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.</b><br></h3>
