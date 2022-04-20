@@ -38,7 +38,7 @@ La familia Córtex M tiene un espacio para direcciones de memoria de 4Gb, partic
   <h4>Modos de operación</h4>
   Los microprocesadores Córtex M3 y M4 tienen dos modos de operación: Handler, en donde se ejecutan las excepciones y Thread, que constituye al modo por defecto en donde corre código común, este a su vez puede ser privilegiado o no privilegiado.<br>
   <h4>Ejemplo de cambio de modo de privilegio</h4>
-  
+
 <h3><b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo.</b><br></h3>
 Registro que puede hacer uso de diferentes modos de direccionamiento mismo que es independiente de la instrucción.
 <h3><b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo</b><br></h3>
@@ -90,8 +90,12 @@ Ejemplo: BGT case_saturate <em>Branch a case_saturate si la instrucción anterio
 El sufijo s es opcional y se utiliza para actualizar las banderas del registro de estado APSR: N, Z, C, V, Q, GE. Estas banderas son analizadas en la ejecución condicional de instrucciones, indicar saturación, entre otros casos.
 Ejemplo: MOVS R2, R1. <em>Mueve los datos de R1 al registro destino R2 y a su vez actualiza las banderas APSR.</em><br>
 <h3><b>3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.</b><br></h3>
+Las instrucciones de aritmética saturada son aquellas que evitan problemas de desbordamiento y la consecuente distorsión de operaciones al limitar un valor máximo y mínimo del dato. En este tipo de escenarios, estas instrucciones dan lugar a la activación de la bandera Q.<br>
+Ejemplo:<br>En una operación con datos de 8 bits no signados, si el resultado es mayor a 255 pues siempre retornará 255 debido a que es el valor máximo que se puede representar con la cantidad de bits disponible. Si el resultado llegara a ser negativo, pues la operación devolverá cero.<br>
+
 <h3><b>4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?</b><br></h3>
 <h3><b>5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.</b><br></h3>
+
 Una instrucción SIMD (Single Instruction Multiple Data), tal como indica su nombre, constituye una sola instrucción que procesa de manera paralela múltiples datos en una sola operación.<br>
 Este tipo de instrucciones es utilizado en aplicaciones que trabajen con una cantidad considerable de datos, usualmente en el campo multimedia, como el procesamiento de señales de audio o edición de imágenes.
 De manera general la implementación de instrucciones SIMD da lugar a que el rendimiento del sistema pueda mejorar ya que la velocidad de procesamiento es mayor.
