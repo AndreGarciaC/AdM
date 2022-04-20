@@ -46,6 +46,11 @@ Por defecto los procesadores inician en modo privilegiado. El software puede cam
 
 <h3><b>7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo.</b><br></h3>
 Registro que puede hacer uso de diferentes modos de direccionamiento mismo que es independiente de la instrucción.
+
+```assembly
+mov PC, #0
+```
+
 <h3><b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo</b><br></h3>
 Las instrucciones IT (IF-THEN) permiten que hasta 4 instrucciones precedentes, ya sean de procesamiento de datos o acceso de memoria, puedan ser ejecutadas condicionalmente. Esto da lugar a la optimización del largo de código evitando el costo que representa la implementación de branches, sobretodo en casos cuando se requieren branches condicionales y no condicionales.<br>
 Ejemplo: <br>
