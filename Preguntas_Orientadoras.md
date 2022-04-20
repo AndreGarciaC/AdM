@@ -93,7 +93,16 @@ Ejemplo: MOVS R2, R1. <em>Mueve los datos de R1 al registro destino R2 y a su ve
 Las instrucciones de aritmética saturada son aquellas que evitan problemas de desbordamiento y la consecuente distorsión de operaciones al limitar un valor máximo y mínimo del dato. En este tipo de escenarios, estas instrucciones dan lugar a la activación de la bandera Q.<br>
 Ejemplo:<br>En una operación con datos de 8 bits no signados, si el resultado es mayor a 255 pues siempre retornará 255 debido a que es el valor máximo que se puede representar con la cantidad de bits disponible. Si el resultado llegara a ser negativo, pues la operación devolverá cero.<br>
 
+```assembly
+mov r1, #255 
+mov r2, #3
+uqadd8 r0, r1,r2 @R0 tendrá un valor de 255
+```
+
 <h3><b>4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?</b><br></h3>
+Para poder implementar funciones assembler en C, es necesario definir los prototipos assembly en un fichero .h y codificarlas en el fichero .S en donde se define la variable global que será exportada a C.<br>
+Para devolver un resultado es necesario cargar el valor en R0. Sin embargo, si la función requiere de parámetros se pueden utilizar R0, R1, R2, R3.<br>
+En el caso de utilizar más registros en la función (a partir de R4) es necesario guardarlos en la pila mediante un push y liberarlos con una instrucción pop.  
 <h3><b>5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.</b><br></h3>
 
 Una instrucción SIMD (Single Instruction Multiple Data), tal como indica su nombre, constituye una sola instrucción que procesa de manera paralela múltiples datos en una sola operación.<br>
