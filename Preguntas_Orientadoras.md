@@ -31,7 +31,10 @@ La familia Córtex M tiene un espacio para direcciones de memoria de 4Gb, partic
   Región de periféricos.<br>
   Control interno - Bus privado.<br>
 <h3><b>5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?</b><br></h3>
-  Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS y PSP para aplicaciones.<br>
+  Los shadowed pointers permiten ubicar código en diferentes regiones de la memoria. MSP para OS e interrupciones y PSP para tareas.<br>
+
+Al manejar punteros de manera independiente entre el sistema operativo y la tareas, garantizamos que si se da un error de stack en una de estas últimas, el kernel seguirá corriendo sin corromperse, garantizando la eficiencia del sistema en esa perspectiva.<br>
+
 <h3><b>6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no privilegiado y nuevamente a privilegiado.</b><br></h3>
   <h4>Modos de privilegio</h4>
   Los microprocesadores Córtex M3 y M4 cuentan con dos modos de privilegio o niveles de acceso: privilegiado y no privilegiado. En el primero, es posible interactuar con todas las areas de memoria, a diferencia del no privilegiado donde se restringen accesos mediante la activación del MPU.<br>
@@ -44,10 +47,14 @@ Registro que puede hacer uso de diferentes modos de direccionamiento mismo que e
 <h3><b>8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo</b><br></h3>
 Las instrucciones IT (IF-THEN) permiten que hasta 4 instrucciones precedentes, ya sean de procesamiento de datos o acceso de memoria, puedan ser ejecutadas condicionalmente. Esto da lugar a la optimización del largo de código evitando el costo que representa la implementación de branches, sobretodo en casos cuando se requieren branches condicionales y no condicionales.<br>
 Ejemplo: <br>
-CMP R0, #0			<em>Compara el dato del registro R0 y el valor 0.</em><br>
-ITT GT				<em>Las siguientes instrucciones se ejecutan si R0 es GREATER THAN 0. Actualiza las banderas APSR.</em><br>
-MULGT R0, R0, R1		<em>Si es GREATER THAN Multiplica R0 x R1 y guarda el resultado en R0.</em><br>
-MOVGT R1, R0		<em>Si es GREATER THAN Mueve los datos de R0 al registro destino R1.</em><br>
+
+```assembly
+CMP R0, #0			@Compara el dato del registro R0 y el valor 0.
+ITT GT				@Las siguientes instrucciones se ejecutan si R0 es GREATER THAN 0. Actualiza las banderas APSR.
+MULGT R0, R0, R1	@Si es GREATER THAN Multiplica R0 x R1 y guarda el resultado en R0.
+MOVGT R1, R0		@Si es GREATER THAN Mueve los datos de R0 al registro destino R1.
+```
+
 <h3><b>9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).</b><br></h3>
  Los microprocesadores Córtex M cuentan con un mecanismo de excepciones incluido para que, en el caso de que ocurra un error, se activen diferentes tipos de handlers. Entre las principales excepciones podemos encontrar:<br>
 <h4>Reset</h4> Ocurre con el reinicio del microprocesador, deteniendo su operación en cualquier instrucción.<br>
