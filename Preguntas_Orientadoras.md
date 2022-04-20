@@ -71,7 +71,12 @@ MOVGT R1, R0		@Si es GREATER THAN Mueve los datos de R0 al registro destino R1.
 En los procesadores ARM, la pila funciona como un mecanismo de uso de memoria que da lugar a que una porción de la misma sea utilizada como un buffer para almacenamiento de datos. La pila o stack es usada para transferir informacion a diferentes rutinas, almacenar variables locales, así como para el almacenamiento temporal durante operaciones con registros y también guarda el estado del procesador y los registros al momento de una excepción.<br>
 En el caso específico de funciones, se hace uso de las instrucciones PUSH y POP. Cuando se llama una función los valores de los registros son guardados en el stack mediante la instrucción PUSH y luego son retornados a sus valores originales utilizando POP.
 <h3><b>11. Describa la secuencia de reset del microprocesador.</b><br></h3>
+1. Actualizar el valor del MSP.<br>
+2. El inicio del espacio de memoria contiene la tabla de vectores, por lo que lo siguiente es leer dos primeras palabras que son: valor del MSP y vector de reset (dirección de inicio del manejador de reset).<br>
+3. Configurar el MSP y el Contador de Programa con los valores leídos.<br>
+
 <h3><b>12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?</b><br></h3>
+
 Los core peripherals son componentes periféricos con un funcionamiento definido dependientes del procesador y cuyo comportamiento es estándar y reusable en toda la gama de procesadores Córtex M. <br>
 Los periféricos que no entran en esta clasificación no requieren una interacción del procesador y pueden presentar características adicionales para implementar diversas funciones.
 <h3><b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo</b><br></h3>
