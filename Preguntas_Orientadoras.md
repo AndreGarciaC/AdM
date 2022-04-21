@@ -79,8 +79,17 @@ En el caso específico de funciones, se hace uso de las instrucciones PUSH y POP
 
 Los core peripherals son componentes periféricos con un funcionamiento definido dependientes del procesador y cuyo comportamiento es estándar y reusable en toda la gama de procesadores Córtex M. <br>
 Los periféricos que no entran en esta clasificación no requieren una interacción del procesador y pueden presentar características adicionales para implementar diversas funciones.
+
 <h3><b>13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo</b><br></h3>
+La implementación de prioridades de interrupción mejora la capacidad de respuesta del sistema. A las interrupciones de diferentes periféricos se les pueden atribuir distintos niveles de prioridad y, en Cortex-M3 y Cortex-M4, los niveles de prioridad se pueden cambiar dinámicamente en tiempo de ejecución.<br>
+A los periféricos relevantes se les puede asignar un nivel de prioridad más alto que el de cualquier otra tarea, mismas que se suspenderán dando paso inmediato a la interrupción y su servicio.<br>
+La forma más adecuada de asignar prioridades es a través de las funciones de acceso de CMSIS-Core, por ejemplo:
+
+```c
+void NVIC_SetPriority (IRQn_Type IRQn,uint32_t priority)
+```
 <h3><b>14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?</b><br></h3>
+
 El estándar de interfaz de software para microcontroladores Cortex, CMSIS por sus siglas en inglés, es un framework de software desarrollado por ARM que abarca la mayoría de los procesadores Cortex-M y sus productos. El objetivo de su creación es estandarizar y garantizar la compatibilidad del software con varias herramientas de desarrollo y entre diferentes soluciones de software.
 
 Las ventajas de CMSIS incluyen:<br>
