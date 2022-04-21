@@ -99,6 +99,8 @@ Facilidad de aprendizaje.<br>
 Independencia de toolchain.<br>
 
 <h3><b>15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo</b><br></h3>
+El control de interrupciones vectoriales anidadas (NVIC por sus siglas en inglés) es un método que gestiona las interrupciones que se producen cuando se están ejecutando otras interrupciones. Una interrupción es una excepción que según la prioridad asignada será atendida de inmediato sin antes guardar sus registros que posteriormente serán restaurados. Se regresará a la función que llamó a la subrutina con la dirección de retorno almacenada en el Link Register (R14).<br>
+En un sistema de reloj despertador se ejecuta el timer para obtener y mostrar la hora, cuando ocurre una excepción con la interrupción que dispara la alarma tiene que atender a esta subrutina y a su vez recibir la interrupción de desactivación.<br>
 <h3><b>16. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?</b><br></h3>
 The Cortex-M4 processor has an optional floating-point FPU. This provides additional registers for processing floating-point data, as well as a floating-point status and control register (FPSCR) (Figure 4.13).<br>
 Each of the 32-bit registers S0 to S31 can be accessed using floating-point instructions. If the processor does not use the FPU it leaves all memory space the same. It saves on the stack only if the program uses it and if the interrupt handler is using it. In this way it is possible for ARM to ensure a latency value.<br>
@@ -121,6 +123,7 @@ En Córtex M, la MPU soporta 8 regiones, en el caso de haber solapamientos los p
 <h3><b>21. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.</b><br></h3>
 PendSV es una excepción que se dispara por software. La excepción PendSV tiene prioridad programable y es utilizada también para llamadas al OS. Esta excepción controla el cambio de contexto retrasándola hasta que todos los demás handlers de IRQ hayan completado su procesamiento. Para ello, la PendSV se programa como la excepción de menor prioridad.
 <h3><b>22. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.</b><br></h3>
+
 El mecanismo de excepción SVC (Supervisor Call) proporciona la transición de no privilegiado a privilegiado. En el marco de un sistema operativo embebido, el SVC se utiliza por una tarea de aplicación que se ejecuta sin privilegios para solicitar servicios al sistema operativo, mismo que corre en un estado de ejecución con privilegios. 
 <h1>ISA</h1>
 <h3><b>1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.</b><br></h3>
