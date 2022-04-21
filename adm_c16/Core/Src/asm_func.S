@@ -203,6 +203,45 @@
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
+@   void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud)
+@
+@ Parametros recibidos:
+@   r0: vectorIn.
+@	r1: vectorOut
+@   r2: longitud del vector.
+@
+@ Valor de retorno:
+@   r2: posición del elemento mayor.
+@
+.thumb_func
+    asm_pack32to16:
+    push {r4-r8}
+    mov r3, #0				@ r3 =0 para iterar
+	ldr r4, =32767			@ Cargo posicion = 0. r4 = pos
+	ldr r5, =-32767			@ Cargo r5 = 1, registro para iterar
+	mov r7, #4
+    .asm_pack_for:			@ Inicio el loop for para recorrer el vector de muestras.
+    	cmp r3, r2
+    	bge end_pack_for			@ Si r5 >= longitud sale del for
+    	mul r6, r3, r7
+   		ldr r6, [r0,r6]		@ Cargo elemento de vector en r6.
+		cmp r6, r4
+		bgt shift				@Realizo 2 instrucciones si r3<r7
+		cmp r6, r5
+		blt shift
+		shift:
+			lsr r6,r6,#16
+			str r6, [r1], 2
+		adds r3, r3,#1
+		b .asm_pack_for
+	end_pack_for:
+	pop {r4-r8}
+    bx lr
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
 @   int32_t max (int32_t * vectorIn, uint32_t longitud)
 @
 @ Parametros recibidos:
@@ -240,15 +279,34 @@
 @	void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
 @
 @ Parametros recibidos:
-@   r0: vector.
-@   r1: longitud del vector.
-@	r2 vector aux, r3 aux, r4 i, r5 aux-i, r6 long -1, r7 16bits
+@   r0: vectorOut.
+@   r1: vectorIn.
+@	r2: longitud
+@	r3: N
 @ Valor de retorno:
 @   void
 @
 .thumb_func
     asm_downsampleM:
-
+    push {r4-r6}
+    mov r4, r3				@inicio i con valor de N
+    mov r7, #4
+    .asm_downsampleM_for:
+    	cmp r4,r2
+    	bgt end_for_ds
+    	subs r5, r3, #1
+		and r5, r4, r5	  @cargo cociente en aux
+		cmp r5, #0
+		beq label
+		muls r7, r4, r7
+		ldr r6, [r1,r7]
+		str r6, [r0, 4]
+	label:
+		adds r4, r4,#1
+		b .asm_downsampleM_for
+	end_for_ds:
+		pop {r4-r6}
+	   	bx lr
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
 @   void invertir (uint16_t * vector, uint32_t longitud)
