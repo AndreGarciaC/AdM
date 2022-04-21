@@ -103,7 +103,16 @@ Independencia de toolchain.<br>
 The Cortex-M4 processor has an optional floating-point FPU. This provides additional registers for processing floating-point data, as well as a floating-point status and control register (FPSCR) (Figure 4.13).<br>
 Each of the 32-bit registers S0 to S31 can be accessed using floating-point instructions. If the processor does not use the FPU it leaves all memory space the same. It saves on the stack only if the program uses it and if the interrupt handler is using it. In this way it is possible for ARM to ensure a latency value.<br>
 <h3><b>17. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.</b><br></h3>
+<h4>Tail chaining</h4>
+
+Si el procesador está a cargo de una excepción y ocurre otra de igual o mayor prioridad puede producir una brecha de tiempo en atender las dos excepciones. A partir de este escenario nace la característica avanzada de tail chaining, una optimización que atiende excepciones pendientes lo más pronto posible omitiendo los pasos de restauración de registros.
+
+<h4>Late arrival</h4>
+
+Es una característica avanzada que garantiza que, si una excepción ocurre en medio de proceso de stacking de otra de menor prioridad, la última en llegar será atendida primero por su prioridad.
+
 <h3><b>18. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?</b><br></h3>
+
 Es un timer decremental de 24 bits integrado de manera opcional o fija en los Córtex M. Funciona como parte del NVIC por lo que al llegar a cero genera un interrupción. Se considera como un aporte a la portabilidad del OS embebido porque el timer en mención está incluido y es estándar dentro de todos los procesadores por lo que el sistema operativo escrito para un microprocesador en específico puede ser reusado.
 <h3><b>19. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?</b><br></h3>
 La unidad de protección de memoria es un componente presente de manera opcional en los procesadores ARM a partir del Córtex M3 y en el Córtex M0+. Es utilizado para establecer condiciones de acceso a memoria, definir regiones de memoria, asignar permisos de acceso y definir los atributos de dichas regiones. Usualmente en sistemas bare-metal es usada bajo una configuración estática para manipular la RAM/SRAM. Se puede implementar lo mismo en sistemas embebidos con sistemas operativos, pero, es posible también llevar a cabo acciones de protección en cada cambio de contexto.
